@@ -53,7 +53,34 @@ class DetailPage extends StatelessWidget {
                   ),
                 ],
               ),
-              Text(city),
+
+              //Bottom Bar
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Container(
+                        padding: const EdgeInsets.all(14),
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.grey,
+                        ),
+                        child: const Icon(Icons.arrow_back_rounded)),
+                    Text(
+                      city,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    Container(
+                        padding: const EdgeInsets.all(14),
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.grey,
+                        ),
+                        child: const Icon(Icons.arrow_forward_rounded)),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

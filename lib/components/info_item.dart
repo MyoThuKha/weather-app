@@ -8,9 +8,9 @@ class InfoItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        //icon
         Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
@@ -18,8 +18,9 @@ class InfoItem extends StatelessWidget {
               border: Border.all(width: 1, color: Colors.grey[300]!),
             ),
             child: Icon(icon)),
+        const SizedBox(height: 12),
 
-        // const SizedBox(height: 12),
+        //text
         Text(text),
       ],
     );
