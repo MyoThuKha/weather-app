@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/components/grid_item.dart';
+import 'package:intl/intl.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -8,8 +9,10 @@ class HomePage extends StatelessWidget {
   void getWeatherDatas() {}
 
   //temporary data
-  void getDate() {
+  String todayDate() {
     DateTime now = DateTime.now();
+    String dateText = DateFormat("EEEE, MMM d").format(now);
+    return dateText;
   }
 
   @override
@@ -29,14 +32,14 @@ class HomePage extends StatelessWidget {
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text("Today"),
-                          Text("Thursday Oct 8"),
+                        children: [
+                          const Text("Today"),
+                          Text(todayDate()),
                         ],
                       ),
                       //time
                       //Home text
-                      const Text("Home"),
+                      const Text("Hello"),
                     ]),
               ),
             ),
