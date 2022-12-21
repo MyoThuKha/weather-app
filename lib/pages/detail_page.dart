@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/components/info_item.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({super.key});
@@ -28,14 +29,30 @@ class DetailPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                temperature,
+                "$temperature\u00B0",
                 style: const TextStyle(fontSize: 180),
               ),
               Text(
                 cityShort,
                 style: const TextStyle(fontSize: 120),
               ),
-              Row(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: const [
+                  InfoItem(
+                    text: "54%",
+                    icon: Icons.water_drop,
+                  ),
+                  InfoItem(
+                    text: "5KM/H",
+                    icon: Icons.air_rounded,
+                  ),
+                  InfoItem(
+                    text: "30%",
+                    icon: Icons.device_thermostat_rounded,
+                  ),
+                ],
+              ),
               Text(city),
             ],
           ),
