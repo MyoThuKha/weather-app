@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/pages/detail_page.dart';
 
 class GridItem extends StatelessWidget {
-  const GridItem({super.key});
+  final String temperature;
+  final String cityShort;
+  final String city;
 
-  final String temperature = "38";
-  final String cityShort = "nyc";
-  final String city = "New York";
+  const GridItem({
+    super.key,
+    required this.temperature,
+    required this.cityShort,
+    required this.city,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, "detail");
+        Navigator.pushNamed(context, "detail", arguments: {
+          "temp": temperature,
+          "city": city,
+          "short": cityShort,
+        });
       },
       child: Container(
         decoration: BoxDecoration(
@@ -24,10 +32,10 @@ class GridItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "$temperature°",
-                style: const TextStyle(
-                  fontSize: 80,
+              FittedBox(
+                child: Text(
+                  "$temperature°",
+                  style: const TextStyle(fontSize: 100),
                 ),
               ),
               Column(

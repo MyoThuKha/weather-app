@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: ListView(
           children: [
             //App Bar
             SizedBox(
@@ -47,16 +47,32 @@ class HomePage extends StatelessWidget {
             //Silver Grid View(items)
             GridView(
               shrinkWrap: true,
-              scrollDirection: Axis.vertical,
+              physics: const NeverScrollableScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 203 / 316,
               ),
-              children: [
-                GridItem(),
-                GridItem(),
-                GridItem(),
-                GridItem(),
+              children: const [
+                GridItem(
+                  temperature: "38",
+                  city: "New York",
+                  cityShort: "nyc",
+                ),
+                GridItem(
+                  temperature: "28",
+                  city: "San Franciso",
+                  cityShort: "sfo",
+                ),
+                GridItem(
+                  temperature: "21",
+                  city: "London",
+                  cityShort: "lon",
+                ),
+                GridItem(
+                  temperature: "37",
+                  city: "Dubai",
+                  cityShort: "dub",
+                ),
               ],
             ),
           ],

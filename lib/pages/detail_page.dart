@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {
-  DetailPage({super.key});
+  const DetailPage({super.key});
 
-  final String temperature = "35";
-  final String cityShort = "nyc".toUpperCase();
-  final String city = "New York";
+  // final String cityShort = "nyc".toUpperCase();
+  // final String city = "New York";
   final String humidity = "34%";
   final String wind = "2";
   final String visible = "10";
@@ -13,6 +12,13 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.width;
+    Map<String, String> routeData =
+        ModalRoute.of(context)!.settings.arguments as Map<String, String>;
+
+    String temperature = routeData["temp"]!;
+    String city = routeData["city"]!;
+    String cityShort = routeData["short"]!.toUpperCase();
+
     return Scaffold(
       body: SafeArea(
         child: SizedBox(
@@ -22,7 +28,7 @@ class DetailPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "$temperature",
+                temperature,
                 style: const TextStyle(fontSize: 180),
               ),
               Text(
