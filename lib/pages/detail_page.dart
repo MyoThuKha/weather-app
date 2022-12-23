@@ -24,32 +24,54 @@ class DetailPage extends StatelessWidget {
       body: SafeArea(
         child: SizedBox(
           width: height,
+
+          // body
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "$temperature\u00B0",
-                style: const TextStyle(fontSize: 180),
-              ),
-              Text(
-                cityShort,
-                style: const TextStyle(fontSize: 120),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: const [
-                  InfoItem(
-                    text: "54%",
-                    icon: Icons.water_drop,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("assets/Sunny.png"),
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 60),
+                          child: Text(
+                            "$temperature\u00B0",
+                            style: const TextStyle(fontSize: 180),
+                          ),
+                        ),
+                        Text(
+                          cityShort,
+                          style: const TextStyle(fontSize: 120),
+                        ),
+                      ],
+                    ),
                   ),
-                  InfoItem(
-                    text: "5KM/H",
-                    icon: Icons.air_rounded,
-                  ),
-                  InfoItem(
-                    text: "30%",
-                    icon: Icons.device_thermostat_rounded,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: const [
+                      InfoItem(
+                        text: "54%",
+                        icon: Icons.water_drop,
+                      ),
+                      InfoItem(
+                        text: "5KM/H",
+                        icon: Icons.air_rounded,
+                      ),
+                      InfoItem(
+                        text: "30%",
+                        icon: Icons.device_thermostat_rounded,
+                      ),
+                    ],
                   ),
                 ],
               ),
