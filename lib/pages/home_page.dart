@@ -1,14 +1,23 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:weather_app/components/grid_item.dart';
 import 'package:intl/intl.dart';
+import '../api.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   //fetch data
-  void getWeatherDatas() {}
+  Future<void> getWeatherDatas(double lat, double lon) async {
+    // lat=44.34&lon=10.99
+    http.Response response = await http.get(Uri.https("api.openweathermap.org",
+        "data/2.5/weather?lat=$lat&lon=$lon&appid=$API_KEY"));
+    print(response);
+    // Map data = jsonDecode(response.body);
+    // return data;
+  }
 
-  //temporary data
   String todayDate() {
     DateTime now = DateTime.now();
     String dateText = DateFormat("EEEE, MMM d").format(now);

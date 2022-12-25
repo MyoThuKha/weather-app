@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_app/components/info_item.dart';
 
@@ -33,28 +34,26 @@ class DetailPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage("assets/Sunny.png"),
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 60),
-                          child: Text(
-                            "$temperature\u00B0",
-                            style: const TextStyle(fontSize: 180),
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Image.asset("assets/Sunny.png", height: 200),
+                      Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 60),
+                            child: Text(
+                              "$temperature\u00B0",
+                              style: const TextStyle(fontSize: 180),
+                            ),
                           ),
-                        ),
-                        Text(
-                          cityShort,
-                          style: const TextStyle(fontSize: 120),
-                        ),
-                      ],
-                    ),
+                          Text(
+                            cityShort,
+                            style: const TextStyle(fontSize: 120),
+                          ),
+                        ],
+                      )
+                    ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -83,12 +82,16 @@ class DetailPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Container(
-                        padding: const EdgeInsets.all(14),
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.grey,
-                        ),
-                        child: const Icon(Icons.arrow_back_rounded)),
+                      padding: const EdgeInsets.all(14),
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.grey,
+                      ),
+                      child: const Icon(
+                        CupertinoIcons.arrow_left_to_line,
+                        size: 18,
+                      ),
+                    ),
                     Text(
                       city,
                       style: const TextStyle(fontSize: 16),
@@ -99,7 +102,10 @@ class DetailPage extends StatelessWidget {
                           shape: BoxShape.circle,
                           color: Colors.grey,
                         ),
-                        child: const Icon(Icons.arrow_forward_rounded)),
+                        child: const Icon(
+                          CupertinoIcons.arrow_right_to_line,
+                          size: 18,
+                        )),
                   ],
                 ),
               ),
