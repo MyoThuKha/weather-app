@@ -50,22 +50,18 @@ class HomePage extends StatelessWidget {
               ),
               children: const [
                 GridItem(
-                  temperature: "38",
                   city: "New York",
                   cityShort: "nyc",
                 ),
                 GridItem(
-                  temperature: "28",
                   city: "San Franciso",
                   cityShort: "sfo",
                 ),
                 GridItem(
-                  temperature: "21",
                   city: "London",
                   cityShort: "lon",
                 ),
                 GridItem(
-                  temperature: "37",
                   city: "Dubai",
                   cityShort: "dub",
                 ),

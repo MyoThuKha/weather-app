@@ -82,7 +82,7 @@ class DetailPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Container(
-                      padding: const EdgeInsets.all(14),
+                      padding: const EdgeInsets.all(22),
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.grey,
@@ -97,7 +97,7 @@ class DetailPage extends StatelessWidget {
                       style: const TextStyle(fontSize: 16),
                     ),
                     Container(
-                        padding: const EdgeInsets.all(14),
+                        padding: const EdgeInsets.all(22),
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.grey,

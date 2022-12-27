@@ -3,17 +3,22 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:weather_app/api.dart';
 
-class GridItem extends StatelessWidget {
-  final String temperature;
+class GridItem extends StatefulWidget {
   final String cityShort;
   final String city;
 
   const GridItem({
     super.key,
-    required this.temperature,
     required this.cityShort,
     required this.city,
   });
+
+  @override
+  State<GridItem> createState() => _GridItemState();
+}
+
+class _GridItemState extends State<GridItem> {
+  String temperature = "-";
 
   //fetch data
   Future<Map<String, dynamic>> getWeatherDatas(double lat, double lon) async {
@@ -25,13 +30,14 @@ class GridItem extends StatelessWidget {
   }
 
   Future<Map<String, dynamic>> getWeatherData() async {
-    String location = city.toLowerCase();
+    String location = widget.city.toLowerCase();
     final String uri =
         "http://api.openweathermap.org/geo/1.0/direct?q=$location&limit=1&appid=$API_KEY";
     http.Response weatherdata = await http.get(Uri.parse(uri));
     Map<String, dynamic> data = await jsonDecode(weatherdata.body)[0];
     Map<String, dynamic> result =
         await getWeatherDatas(data['lat'], data['lon']);
+
     return result;
   }
 
@@ -41,8 +47,8 @@ class GridItem extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(context, "detail", arguments: {
           "temp": temperature,
-          "city": city,
-          "short": cityShort,
+          "city": widget.city,
+          "short": widget.cityShort,
         });
       },
       child: Container(
@@ -59,27 +65,29 @@ class GridItem extends StatelessWidget {
                     child: Text("Loading..."),
                   );
                 }
-                snapshot.data;
+
+                temperature =
+                    snapshot.data!["current_weather"]["temperature"].toString();
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      // "$temperature°",
-                      "${snapshot.data!["current_weather"]["temperature"]}°",
+                      "$temperature°",
+                      // "${snapshot.data!["current_weather"]["temperature"]}°",
                       style: const TextStyle(fontSize: 64),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          cityShort.toUpperCase(),
+                          widget.cityShort.toUpperCase(),
                           style: const TextStyle(
                             fontSize: 24,
                           ),
                         ),
                         Text(
-                          city,
+                          widget.city,
                           style: const TextStyle(color: Colors.grey),
                         ),
                       ],
