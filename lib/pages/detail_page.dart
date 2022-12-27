@@ -42,9 +42,11 @@ class DetailPage extends StatelessWidget {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(left: 60),
-                            child: Text(
-                              "$temperature\u00B0",
-                              style: const TextStyle(fontSize: 180),
+                            child: FittedBox(
+                              child: Text(
+                                "$temperature\u00B0",
+                                style: const TextStyle(fontSize: 180),
+                              ),
                             ),
                           ),
                           Text(
