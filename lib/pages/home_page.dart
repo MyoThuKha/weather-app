@@ -1,22 +1,9 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:weather_app/components/grid_item.dart';
 import 'package:intl/intl.dart';
-// import 'dart:convert';
-// import '../api.dart';
-import 'package:http/http.dart' as http;
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
-  //fetch data
-  Future<Map<String, dynamic>> getWeatherDatas(double lat, double lon) async {
-    String uri =
-        "https://api.open-meteo.com/v1/forecast?latitude=$lat&longitude=$lon&hourly=temperature_2m,relativehumidity_2m,precipitation,weathercode,windspeed_10m&daily=temperature_2m_max&current_weather=true&timeformat=unixtime&timezone=auto";
-    http.Response data = await http.get(Uri.parse(uri));
-    Map<String, dynamic> result = await jsonDecode(data.body);
-    return result;
-  }
 
   String todayDate() {
     DateTime now = DateTime.now();
@@ -26,7 +13,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(getWeatherDatas(37.77, -122.42));
     return Scaffold(
       body: SafeArea(
         child: ListView(
