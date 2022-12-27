@@ -64,12 +64,10 @@ class GridItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    FittedBox(
-                      child: Text(
-                        // "$temperature°",
-                        "${snapshot.data!["current_weather"]["temperature"]}°",
-                        style: const TextStyle(fontSize: 100),
-                      ),
+                    Text(
+                      // "$temperature°",
+                      "${snapshot.data!["current_weather"]["temperature"]}°",
+                      style: const TextStyle(fontSize: 64),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
