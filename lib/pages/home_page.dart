@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/components/grid_item.dart';
 import 'package:intl/intl.dart';
+import 'package:weather_app/data/cities.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -41,31 +42,17 @@ class HomePage extends StatelessWidget {
             ),
 
             //Silver Grid View(items)
-            GridView(
+            GridView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 203 / 316,
               ),
-              children: const [
-                GridItem(
-                  city: "New York",
-                  cityShort: "nyc",
-                ),
-                GridItem(
-                  city: "San Franciso",
-                  cityShort: "sfo",
-                ),
-                GridItem(
-                  city: "London",
-                  cityShort: "lon",
-                ),
-                GridItem(
-                  city: "Dubai",
-                  cityShort: "dub",
-                ),
-              ],
+              itemCount: cities.length,
+              itemBuilder: ((context, index) => GridItem(
+                  city: cities[index]["city"]!,
+                  cityShort: cities[index]["short"]!)),
             ),
           ],
         ),

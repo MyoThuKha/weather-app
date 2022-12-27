@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/data/weather_data.dart';
 
 class GridItem extends StatefulWidget {
-  final String cityShort;
   final String city;
+  final String cityShort;
 
   const GridItem({
     super.key,
-    required this.cityShort,
     required this.city,
+    required this.cityShort,
   });
 
   @override

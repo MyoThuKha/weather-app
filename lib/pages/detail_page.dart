@@ -39,6 +39,7 @@ class DetailPage extends StatelessWidget {
                     children: [
                       Image.asset("assets/Sunny.png", height: 200),
                       Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(left: 60),
