@@ -10,7 +10,6 @@ class DetailPage extends StatelessWidget {
 
   // final String cityShort = "nyc".toUpperCase();
   final String humidity = "34%";
-  final String wind = "2";
   final String visible = "10";
 
   @override
@@ -26,7 +25,9 @@ class DetailPage extends StatelessWidget {
     Map dataList = context.read<WeatherModal>().weatherData;
 
     final String temperature =
-        dataList[city]["current_weather"]["temperature"].toString();
+        dataList[city]["current_weather"]["temperature"].toStringAsFixed(0);
+    final String wind =
+        dataList[city]["current_weather"]["windspeed"].toString();
 
     return Scaffold(
       body: SafeArea(
@@ -37,52 +38,55 @@ class DetailPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image.asset("assets/Sunny.png", height: 200),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 60),
-                            child: FittedBox(
-                              child: Text(
-                                "$temperature\u00B0",
-                                style: const TextStyle(fontSize: 180),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Image.asset("assets/Sunny.png", height: 200),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 60),
+                              child: FittedBox(
+                                child: Text(
+                                  "$temperature\u00B0",
+                                  style: const TextStyle(fontSize: 240),
+                                ),
                               ),
                             ),
-                          ),
-                          Text(
-                            cityShort,
-                            style: const TextStyle(fontSize: 120),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: const [
-                      InfoItem(
-                        text: "54%",
-                        icon: Icons.water_drop,
-                      ),
-                      InfoItem(
-                        text: "5KM/H",
-                        icon: Icons.air_rounded,
-                      ),
-                      InfoItem(
-                        text: "30%",
-                        icon: Icons.device_thermostat_rounded,
-                      ),
-                    ],
-                  ),
-                ],
+                            Text(
+                              cityShort,
+                              style: const TextStyle(fontSize: 140),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        InfoItem(
+                          text: "54%",
+                          icon: Icons.water_drop,
+                        ),
+                        InfoItem(
+                          text: "${wind}KM/H",
+                          icon: Icons.air_rounded,
+                        ),
+                        InfoItem(
+                          text: "30%",
+                          icon: Icons.device_thermostat_rounded,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
 
               //Bottom Bar

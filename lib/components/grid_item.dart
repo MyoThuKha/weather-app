@@ -40,7 +40,7 @@ class _GridItemState extends State<GridItem> {
           border: Border.all(width: 0.5, color: Colors.grey[400]!),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
           child: FutureBuilder(
               future: getWeatherData(widget.city),
               builder: (context, snapshot) {
@@ -49,19 +49,21 @@ class _GridItemState extends State<GridItem> {
                     child: Text("Loading..."),
                   );
                 }
-                //----------------
-                saveData(snapshot.data!);
-                temperature =
-                    snapshot.data!["current_weather"]["temperature"].toString();
-                // -------------------
+                if (snapshot.hasData) {
+                  saveData(snapshot.data!);
+                  temperature = snapshot.data!["current_weather"]["temperature"]
+                      .toStringAsFixed(0);
+                }
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "$temperature°",
-                      // "${snapshot.data!["current_weather"]["temperature"]}°",
-                      style: const TextStyle(fontSize: 64),
+                    FittedBox(
+                      child: Text(
+                        "$temperature°",
+                        // "${snapshot.data!["current_weather"]["temperature"]}°",
+                        style: const TextStyle(fontSize: 98),
+                      ),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

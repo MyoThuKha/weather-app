@@ -21,7 +21,10 @@ class InfoItem extends StatelessWidget {
         const SizedBox(height: 12),
 
         //text
-        Text(text),
+        Text(
+          text,
+          style: const TextStyle(fontWeight: FontWeight.w600),
+        ),
       ],
     );
   }
