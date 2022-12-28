@@ -30,6 +30,7 @@ class _GridItemState extends State<GridItem> {
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, "detail", arguments: {
+          "index": widget.index,
           "city": widget.city,
           "short": widget.cityShort,
         });

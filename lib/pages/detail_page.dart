@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_app/components/info_item.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_app/data/cities.dart';
 import 'package:weather_app/data/weather.dart';
 
 class DetailPage extends StatelessWidget {
@@ -18,6 +19,7 @@ class DetailPage extends StatelessWidget {
     Map<String, dynamic> routeData =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
+    int index = routeData["index"];
     String city = routeData["city"]!;
     String cityShort = routeData["short"]!.toUpperCase();
 
@@ -89,31 +91,55 @@ class DetailPage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Container(
-                      padding: const EdgeInsets.all(22),
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.grey,
-                      ),
-                      child: const Icon(
-                        CupertinoIcons.arrow_left_to_line,
-                        size: 18,
-                      ),
-                    ),
-                    Text(
-                      city,
-                      style: const TextStyle(fontSize: 16),
-                    ),
-                    Container(
+                    GestureDetector(
+                      onTap: () {
+                        int nextIndex =
+                            index == 0 ? (cities.length - 1) : index - 1;
+                        Navigator.pushReplacementNamed(context, 'detail',
+                            arguments: {
+                              "index": nextIndex,
+                              "city": cities[nextIndex]["city"],
+                              "short": cities[nextIndex]["short"],
+                            });
+                      },
+                      child: Container(
                         padding: const EdgeInsets.all(22),
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.grey,
                         ),
                         child: const Icon(
-                          CupertinoIcons.arrow_right_to_line,
+                          CupertinoIcons.arrow_left_to_line,
                           size: 18,
-                        )),
+                        ),
+                      ),
+                    ),
+                    Text(
+                      city,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        final int nextIndex =
+                            (index == cities.length - 1) ? 0 : index + 1;
+                        Navigator.pushReplacementNamed(context, 'detail',
+                            arguments: {
+                              "index": nextIndex,
+                              "city": cities[nextIndex]["city"],
+                              "short": cities[nextIndex]["short"],
+                            });
+                      },
+                      child: Container(
+                          padding: const EdgeInsets.all(22),
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.grey,
+                          ),
+                          child: const Icon(
+                            CupertinoIcons.arrow_right_to_line,
+                            size: 18,
+                          )),
+                    ),
                   ],
                 ),
               ),
