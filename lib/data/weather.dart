@@ -28,11 +28,13 @@ class WeatherModal extends ChangeNotifier {
 
   void addData(Map data) {
     weatherData.add(data);
-    notifyListeners();
   }
 
   void updateData(Map data, int index) {
     weatherData[index] = data;
-    notifyListeners();
+  }
+
+  void printData() {
+    print(weatherData);
   }
 }
