@@ -17,7 +17,7 @@ class InfoItem extends StatelessWidget {
               shape: BoxShape.circle,
               border: Border.all(width: 1, color: Colors.grey[300]!),
             ),
-            child: Icon(icon)),
+            child: Center(child: Icon(icon))),
         const SizedBox(height: 12),
 
         //text

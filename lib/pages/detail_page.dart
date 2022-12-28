@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/components/info_item.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/data/cities.dart';
+import 'package:weather_app/data/fetch_data.dart';
 import 'package:weather_app/data/weather.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({super.key});
 
   // final String cityShort = "nyc".toUpperCase();
-  final String humidity = "34%";
   final String visible = "10";
 
   @override
@@ -23,11 +23,13 @@ class DetailPage extends StatelessWidget {
     String cityShort = routeData["short"]!.toUpperCase();
 
     Map dataList = context.read<WeatherModal>().weatherData;
-
     final String temperature =
         dataList[city]["current_weather"]["temperature"].toStringAsFixed(0);
     final String wind =
         dataList[city]["current_weather"]["windspeed"].toString();
+    final String humidity =
+        calculateAverage(dataList[city]["hourly"]["relativehumidity_2m"]);
+    final String rain = calculateAverage(dataList[city]["hourly"]["rain"]);
 
     return Scaffold(
       body: SafeArea(
@@ -53,11 +55,9 @@ class DetailPage extends StatelessWidget {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 60),
-                              child: FittedBox(
-                                child: Text(
-                                  "$temperature\u00B0",
-                                  style: const TextStyle(fontSize: 240),
-                                ),
+                              child: Text(
+                                "$temperature\u00B0",
+                                style: const TextStyle(fontSize: 198),
                               ),
                             ),
                             Text(
@@ -72,7 +72,7 @@ class DetailPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         InfoItem(
-                          text: "54%",
+                          text: "$humidity%",
                           icon: Icons.water_drop,
                         ),
                         InfoItem(
@@ -80,8 +80,9 @@ class DetailPage extends StatelessWidget {
                           icon: Icons.air_rounded,
                         ),
                         InfoItem(
-                          text: "30%",
-                          icon: Icons.device_thermostat_rounded,
+                          text: "${rain}MM",
+                          // icon: Icons.device_thermostat_rounded,
+                          icon: CupertinoIcons.cloud_rain_fill,
                         ),
                       ],
                     ),

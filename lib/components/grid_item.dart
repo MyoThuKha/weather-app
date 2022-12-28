@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../data/weather.dart';
 import 'package:provider/provider.dart';
+import '../data/weather.dart';
+import '../data/fetch_data.dart';
 
 class GridItem extends StatefulWidget {
   final int index;
