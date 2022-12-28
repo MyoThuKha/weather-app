@@ -24,17 +24,9 @@ Future<Map<String, dynamic>> getWeatherData(String city) async {
 }
 
 class WeatherModal extends ChangeNotifier {
-  List weatherData = [];
+  Map weatherData = {};
 
-  void addData(Map data) {
-    weatherData.add(data);
-  }
-
-  void updateData(Map data, int index) {
-    weatherData[index] = data;
-  }
-
-  void printData() {
-    print(weatherData);
+  void addData(Map data, String city) {
+    weatherData[city] = data;
   }
 }

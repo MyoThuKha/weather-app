@@ -24,7 +24,8 @@ class DetailPage extends StatelessWidget {
     String city = routeData["city"]!;
     String cityShort = routeData["short"]!.toUpperCase();
 
-    List dataList = context.read<WeatherModal>().weatherData;
+    Map dataList = context.read<WeatherModal>().weatherData;
+    print(dataList[city]["timezone"]);
 
     return Scaffold(
       body: SafeArea(

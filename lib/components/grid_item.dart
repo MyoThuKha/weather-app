@@ -22,12 +22,7 @@ class _GridItemState extends State<GridItem> {
   String temperature = "-";
 
   void saveData(data) {
-    List weatherData = context.read<WeatherModal>().weatherData;
-    if (weatherData.contains(data)) {
-      context.read<WeatherModal>().updateData(data, widget.index);
-    } else {
-      context.read<WeatherModal>().addData(data);
-    }
+    context.read<WeatherModal>().addData(data, widget.city);
   }
 
   @override
