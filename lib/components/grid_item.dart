@@ -30,7 +30,6 @@ class _GridItemState extends State<GridItem> {
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, "detail", arguments: {
-          "temp": temperature,
           "city": widget.city,
           "short": widget.cityShort,
         });
@@ -49,14 +48,11 @@ class _GridItemState extends State<GridItem> {
                     child: Text("Loading..."),
                   );
                 }
-
                 //----------------
+                saveData(snapshot.data!);
                 temperature =
                     snapshot.data!["current_weather"]["temperature"].toString();
-
-                saveData(snapshot.data!);
                 // -------------------
-
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,

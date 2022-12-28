@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_app/components/info_item.dart';
@@ -20,12 +18,13 @@ class DetailPage extends StatelessWidget {
     Map<String, dynamic> routeData =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
-    String temperature = routeData["temp"]!;
     String city = routeData["city"]!;
     String cityShort = routeData["short"]!.toUpperCase();
 
     Map dataList = context.read<WeatherModal>().weatherData;
-    print(dataList[city]["timezone"]);
+
+    final String temperature =
+        dataList[city]["current_weather"]["temperature"].toString();
 
     return Scaffold(
       body: SafeArea(
