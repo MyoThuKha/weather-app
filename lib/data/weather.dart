@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:weather_app/api.dart';
 
@@ -20,4 +21,18 @@ Future<Map<String, dynamic>> getWeatherData(String city) async {
   Map<String, dynamic> result = await getWeatherDatas(data['lat'], data['lon']);
 
   return result;
+}
+
+class WeatherModal extends ChangeNotifier {
+  List weatherData = [];
+
+  void addData(Map data) {
+    weatherData.add(data);
+    notifyListeners();
+  }
+
+  void updateData(Map data, int index) {
+    weatherData[index] = data;
+    notifyListeners();
+  }
 }

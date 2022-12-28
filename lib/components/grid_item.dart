@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/data/weather_data.dart';
+import 'package:weather_app/data/weather.dart';
 
 class GridItem extends StatefulWidget {
+  final int index;
   final String city;
   final String cityShort;
 
   const GridItem({
     super.key,
+    required this.index,
     required this.city,
     required this.cityShort,
   });
@@ -17,6 +19,15 @@ class GridItem extends StatefulWidget {
 
 class _GridItemState extends State<GridItem> {
   String temperature = "-";
+  WeatherModal weather = WeatherModal();
+
+  void saveData(data) {
+    if (weather.weatherData.asMap().containsKey(widget.index)) {
+      weather.updateData(data, widget.index);
+    } else {
+      weather.addData(data);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +56,7 @@ class _GridItemState extends State<GridItem> {
 
                 temperature =
                     snapshot.data!["current_weather"]["temperature"].toString();
+                saveData(snapshot.data!);
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,

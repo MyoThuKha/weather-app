@@ -51,6 +51,7 @@ class HomePage extends StatelessWidget {
               ),
               itemCount: cities.length,
               itemBuilder: ((context, index) => GridItem(
+                  index: index,
                   city: cities[index]["city"]!,
                   cityShort: cities[index]["short"]!)),
             ),
