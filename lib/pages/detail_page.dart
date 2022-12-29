@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:weather_app/components/chart_page.dart';
 import 'package:weather_app/components/info_item.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/data/cities.dart';
@@ -89,6 +90,8 @@ class DetailPage extends StatelessWidget {
                   ],
                 ),
               ),
+              ChartPage(
+                  weeklyDatas: dataList[city]["daily"]["temperature_2m_max"]),
 
               //Bottom Bar
               Padding(
@@ -100,7 +103,7 @@ class DetailPage extends StatelessWidget {
                       onTap: () {
                         int nextIndex =
                             index == 0 ? (cities.length - 1) : index - 1;
-                        Navigator.pushReplacementNamed(context, 'detail',
+                        Navigator.pushReplacementNamed(context, '/detail',
                             arguments: {
                               "index": nextIndex,
                               "city": cities[nextIndex]["city"],
@@ -127,7 +130,7 @@ class DetailPage extends StatelessWidget {
                       onTap: () {
                         final int nextIndex =
                             (index == cities.length - 1) ? 0 : index + 1;
-                        Navigator.pushReplacementNamed(context, 'detail',
+                        Navigator.pushReplacementNamed(context, '/detail',
                             arguments: {
                               "index": nextIndex,
                               "city": cities[nextIndex]["city"],

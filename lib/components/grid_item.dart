@@ -30,7 +30,7 @@ class _GridItemState extends State<GridItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, "detail", arguments: {
+        Navigator.pushNamed(context, "/detail", arguments: {
           "index": widget.index,
           "city": widget.city,
           "short": widget.cityShort,
@@ -51,9 +51,9 @@ class _GridItemState extends State<GridItem> {
                   );
                 }
                 if (snapshot.hasData) {
-                  saveData(snapshot.data!);
                   temperature = snapshot.data!["current_weather"]["temperature"]
                       .toStringAsFixed(0);
+                  saveData(snapshot.data);
                 }
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

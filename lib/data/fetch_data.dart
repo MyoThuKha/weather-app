@@ -15,7 +15,7 @@ Future<Map<String, dynamic>> getWeatherDatas(double lat, double lon) async {
 Future<Map<String, dynamic>> getWeatherData(String city) async {
   String location = city.toLowerCase();
   final String uri =
-      "http://api.openweathermap.org/geo/1.0/direct?q=$location&limit=1&appid=$API_KEY";
+      "http://api.openweathermap.org/geo/1.0/direct?q=$location&limit=1&appid=$apiKey";
   http.Response weatherdata = await http.get(Uri.parse(uri));
   Map<String, dynamic> data = await jsonDecode(weatherdata.body)[0];
   Map<String, dynamic> result = await getWeatherDatas(data['lat'], data['lon']);

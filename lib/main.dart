@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/data/weather.dart';
+// import 'package:weather_app/components/chart_page.dart';
 import 'package:weather_app/pages/detail_page.dart';
 import 'package:weather_app/pages/home_page.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           "/": (context) => const HomePage(),
-          "detail": (context) => const DetailPage(),
+          "/detail": (context) => const DetailPage(),
+          // "/chart": (context) => const ChartPage(),
         },
         // home: const HomePage(),
       ),
