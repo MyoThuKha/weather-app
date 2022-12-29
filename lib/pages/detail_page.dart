@@ -30,7 +30,7 @@ class DetailPage extends StatelessWidget {
         dataList[city]["current_weather"]["windspeed"].toString();
     final String humidity =
         calculateAverage(dataList[city]["hourly"]["relativehumidity_2m"]);
-    final String rain = calculateAverage(dataList[city]["hourly"]["rain"]);
+    final String rain = dataList[city]["daily"]["rain_sum"][0].toString();
 
     return Scaffold(
       body: SafeArea(

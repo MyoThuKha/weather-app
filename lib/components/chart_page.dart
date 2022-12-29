@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ChartPage extends StatefulWidget {
   final List weeklyDatas;
@@ -17,12 +18,17 @@ class _ChartPageState extends State<ChartPage> {
 
   // bool showAvg = false;
 
+  String today() {
+    DateTime now = DateTime.now();
+    String dateText = DateFormat("EEE").format(now);
+    return dateText;
+  }
+
   @override
   Widget build(BuildContext context) {
     final List weekly = widget.weeklyDatas;
     final double largest =
         weekly.reduce((curr, next) => curr > next ? curr : next);
-    // print(widget.weeklyDatas);
     return AspectRatio(
       aspectRatio: 3 / 1,
       child: LineChart(LineChartData(
@@ -94,17 +100,9 @@ class _ChartPageState extends State<ChartPage> {
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
     // print(value.toInt());
-    List<String> items = [
-      "",
-      "Mon",
-      "Tue",
-      "Wed",
-      "Thur",
-      "Fri",
-      "Sat",
-      "Sun",
-      ""
-    ];
+    List<String> items = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    items.insert(0, "");
+    items.add("");
     String day = items[value.toInt()];
 
     return SideTitleWidget(
@@ -112,7 +110,6 @@ class _ChartPageState extends State<ChartPage> {
       child: Text(
         day,
         style: const TextStyle(
-          color: Colors.black,
           fontWeight: FontWeight.bold,
           fontSize: 16,
         ),

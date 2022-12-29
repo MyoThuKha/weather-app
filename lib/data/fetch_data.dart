@@ -6,7 +6,7 @@ import 'package:weather_app/api.dart';
 // "https://api.open-meteo.com/v1/forecast?latitude=$lat&longitude=$lon&hourly=temperature_2m,relativehumidity_2m,precipitation,weathercode,windspeed_10m&daily=temperature_2m_max&current_weather=true&timeformat=unixtime&timezone=auto";
 Future<Map<String, dynamic>> getWeatherDatas(double lat, double lon) async {
   String uri =
-      "https://api.open-meteo.com/v1/forecast?latitude=$lat&longitude=$lon&hourly=relativehumidity_2m,rain&daily=temperature_2m_max&current_weather=true&timeformat=unixtime&timezone=auto";
+      "https://api.open-meteo.com/v1/forecast?latitude=$lat&longitude=$lon&hourly=relativehumidity_2m&daily=temperature_2m_max,rain_sum&current_weather=true&timezone=auto";
   http.Response data = await http.get(Uri.parse(uri));
   Map<String, dynamic> result = await jsonDecode(data.body);
   return result;
