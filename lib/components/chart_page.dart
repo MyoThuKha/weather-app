@@ -11,13 +11,6 @@ class ChartPage extends StatefulWidget {
 }
 
 class _ChartPageState extends State<ChartPage> {
-  List<Color> gradientColors = [
-    const Color(0xff23b6e6),
-    const Color(0xff02d39a),
-  ];
-
-  // bool showAvg = false;
-
   String today() {
     DateTime now = DateTime.now();
     String dateText = DateFormat("EEE").format(now);
@@ -27,82 +20,82 @@ class _ChartPageState extends State<ChartPage> {
   @override
   Widget build(BuildContext context) {
     final List weekly = widget.weeklyDatas;
-    final double largest =
+    final double highest =
         weekly.reduce((curr, next) => curr > next ? curr : next);
+    final double lowest =
+        weekly.reduce((curr, next) => curr < next ? curr : next);
     return AspectRatio(
       aspectRatio: 3 / 1,
-      child: LineChart(LineChartData(
-        gridData: FlGridData(show: false),
-        titlesData: FlTitlesData(
-          show: true,
-          topTitles: AxisTitles(
-            sideTitles: SideTitles(showTitles: false),
-          ),
-          rightTitles: AxisTitles(
-            sideTitles: SideTitles(showTitles: false),
-          ),
-          leftTitles: AxisTitles(
-            sideTitles: SideTitles(
-              showTitles: false,
+      child: LineChart(
+        LineChartData(
+          borderData: FlBorderData(show: false),
+          gridData: FlGridData(show: false),
+          minX: 0,
+          minY: lowest,
+          maxX: 8,
+          maxY: highest,
+
+          //chart data
+          lineBarsData: [
+            LineChartBarData(
+              barWidth: 2,
+              isCurved: true,
+              isStrokeCapRound: true,
+              color: Colors.grey[800],
+              dotData: FlDotData(
+                show: true,
+                // checkToShowDot: (spot, barData) => spot == barData.spots[1],
+              ),
+              belowBarData: BarAreaData(
+                show: true,
+                color: Colors.grey[300],
+              ),
+              spots: [
+                FlSpot(0, weekly[0]),
+                FlSpot(1, weekly[0]),
+                FlSpot(2, weekly[1]),
+                FlSpot(3, weekly[2]),
+                FlSpot(4, weekly[3]),
+                FlSpot(5, weekly[4]),
+                FlSpot(6, weekly[5]),
+                FlSpot(7, weekly[6]),
+                FlSpot(8, weekly[6]),
+              ],
             ),
-          ),
-          bottomTitles: AxisTitles(
-            sideTitles: SideTitles(
-              showTitles: true,
-              reservedSize: 30,
-              interval: 1,
-              getTitlesWidget: bottomTitleWidgets,
-            ),
-          ),
-        ),
-        borderData: FlBorderData(show: false),
-        minX: 0,
-        minY: 0,
-        // maxX: 6,
-        maxX: 8,
-        maxY: largest,
-        lineBarsData: [
-          LineChartBarData(
-            color: Colors.grey[800],
-            spots: [
-              FlSpot(0, weekly[6]),
-              FlSpot(1, weekly[0]),
-              FlSpot(2, weekly[1]),
-              FlSpot(3, weekly[2]),
-              FlSpot(4, weekly[3]),
-              FlSpot(5, weekly[4]),
-              FlSpot(6, weekly[5]),
-              FlSpot(7, weekly[6]),
-              FlSpot(8, weekly[0]),
-            ],
-            isCurved: true,
-            // gradient: LinearGradient(
-            //   colors: gradientColors,
-            // ),
-            barWidth: 2,
-            isStrokeCapRound: true,
-            dotData: FlDotData(
-              show: false,
-            ),
-            belowBarData: BarAreaData(
-              show: false,
-              gradient: LinearGradient(
-                colors: gradientColors
-                    .map((color) => color.withOpacity(0.3))
-                    .toList(),
+          ],
+
+          //title
+          titlesData: FlTitlesData(
+            show: true,
+            topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            bottomTitles: AxisTitles(
+              sideTitles: SideTitles(
+                showTitles: true,
+                reservedSize: 30,
+                interval: 1,
+                getTitlesWidget: bottomTitleWidgets,
               ),
             ),
           ),
-        ],
-      )),
+        ),
+      ),
     );
   }
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
-    // print(value.toInt());
-    List<String> items = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    List<String> days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    List<String> items = [today()];
+
+    for (int i = 1; i < days.length; i++) {
+      int nextDay = days.indexOf(today()) + i;
+      if (nextDay >= days.length) nextDay -= days.length;
+      items.add(days[nextDay]);
+    }
     items.insert(0, "");
     items.add("");
+
     String day = items[value.toInt()];
 
     return SideTitleWidget(

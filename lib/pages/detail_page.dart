@@ -58,12 +58,12 @@ class DetailPage extends StatelessWidget {
                               padding: const EdgeInsets.only(left: 60),
                               child: Text(
                                 "$temperature\u00B0",
-                                style: const TextStyle(fontSize: 198),
+                                style: const TextStyle(fontSize: 160),
                               ),
                             ),
                             Text(
                               cityShort,
-                              style: const TextStyle(fontSize: 140),
+                              style: const TextStyle(fontSize: 120),
                             ),
                           ],
                         )

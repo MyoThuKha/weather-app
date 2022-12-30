@@ -20,7 +20,7 @@ class GridItem extends StatefulWidget {
 }
 
 class _GridItemState extends State<GridItem> {
-  String temperature = "-";
+  String temperature = "";
 
   void saveData(data) {
     context.read<WeatherModal>().addData(data, widget.city);
@@ -30,6 +30,8 @@ class _GridItemState extends State<GridItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        //if fail to fetch data, dont go to next page.
+        if (temperature == "") return;
         Navigator.pushNamed(context, "/detail", arguments: {
           "index": widget.index,
           "city": widget.city,
@@ -61,7 +63,7 @@ class _GridItemState extends State<GridItem> {
                   children: [
                     FittedBox(
                       child: Text(
-                        "$temperature°",
+                        temperature == "" ? "UNREACHABLE" : "$temperature°",
                         // "${snapshot.data!["current_weather"]["temperature"]}°",
                         style: const TextStyle(fontSize: 98),
                       ),
